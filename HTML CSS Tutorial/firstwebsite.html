@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>First Website</title>
+        <meta charset="utf-8" />
+        <meta name="author" content="Akash Soni" />
+        <meta name="description" content="rfsdfdsfsd" />
+        <link href="./external.css" rel="stylesheet" />
+        <style></style>
+        <script></script>
+    </head>
+    <body>
+        <!-- basic tags -->
+        <p lang="" dir="ltr" id="para" class="subtitle" style="color: red;" title="This is a paragraph">Hello World</p>
+        <div>This is a        div      tag</div>
+        <span>This is a span tag</span><br />
+        <span>This is another span tag</span>
+        <hr />
+        <a href="https://www.google.com/" target="_blank" download="./external.css">Google</a>
+        <br />
+        <pre>
+            This is a        pre 
+            processing      tag
+        </pre>
+
+        <br><br><hr><br><br>
+
+        <!-- semantic tags -->
+        <nav>This is a nav tag</nav>
+        <header></header>
+        <footer></footer>
+        <main></main>
+        <time></time>
+        <aside></aside>
+        <section></section>
+        <article></article>
+        <br><br><hr><br><br>
+
+        <!-- multimedia tags -->
+        <img height="250px" src="https://static.semrush.com/blog/uploads/media/cc/85/cc85d452a743e27f68d426df35e4da7d/original.png" />
+        <img src="./user-avatar.png" alt="User avatar" height="250px" />
+        <audio controls>
+            <source src="./audio.mp3"/>
+        </audio>
+        <video height="250px" controls>
+            <source src="./video.mp4" />
+        </video>
+
+        <embed src="https://www.youtube.com/embed/LVbUNRwpXzw?si=Z2VMqiqMElliGp8q" />
+        <iframe height="500px" src="https://www.tutorialrepublic.com/html-reference/html5-tags.php"></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/LVbUNRwpXzw?si=Z2VMqiqMElliGp8q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <br><br><hr><br><br>
+
+        <!-- formatting tags -->
+        <b>Bold</b><i>Italics</i><u>Underline</u><br />
+        <strong>Strong</strong><em>Emphasis</em><ins>Insert</ins>
+
+        <marquee direction="up" height="100px"><center><p><mark>HTML</mark> stands for <span style="color: red;">Hypertext <del>Marking</del><ins>Markup</ins> Language</span></p></center></marquee>
+
+        2<sup>2</sup><br> <sub>3</sub>√27
+
+        <br><br><hr><br><br>
+
+        <!-- list tags -->
+        <ol type="">
+            <li>List Item 1</li>
+            <li>List Item 2</li>
+            <li>List Item 3</li>
+            <li>List Item 4</li>
+            <li>list Item 5</li>
+        </ol>
+        <ul type="square">
+            <li>List Item</li>
+            <li>List Item</li>
+            <li>List Item</li>
+            <li>List Item</li>
+            <li>List Item</li>
+        </ul>
+        <dl>
+            <dt>HTML &lt;abbr&gt; Tag</dt>
+            <dd>he <abbr> tag defines an abbreviated form of a longer word or phrase.
+
+                The following table summarizes the usages context and the version history of this tag.
+                
+                Placement:	Inline
+                Content:	Inline and text
+                Start/End Tag:	Start tag: required, End tag: required
+                Version:	HTML 4, 4.01, 5</dd>
+        </dl>
+
+        <!-- table tags -->
+        <table border="5px">
+            <caption>Employee DB</caption>
+            <colgroup>
+                <col />
+                <col style="background-color: rebeccapurple;" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th colspan="2">Name</th>
+                    <th rowspan="2">Address</th>
+                    <th rowspan="2">Email ID</th>
+                </tr>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td >Akash</td>
+                    <td >Soni</td>
+                    <td>Bengaluru</td>
+                    <td>akash@gmail.com</td>
+                </tr>
+                <tr>
+                    <td >Akash</td>
+                    <td >Soni</td>
+                    <td>Bengaluru</td>
+                    <td>akash@gmail.com</td>
+                </tr>
+                <tr>
+                    <td >Akash</td>
+                    <td >Soni</td>
+                    <td>Bengaluru</td>
+                    <td>akash@gmail.com</td>
+                </tr>
+                <tr>
+                    <td >Akash</td>
+                    <td >Soni</td>
+                    <td>Bengaluru</td>
+                    <td>akash@gmail.com</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td >Akash</td>
+                    <td >Soni</td>
+                    <td>Bengaluru</td>
+                    <td>akash@gmail.com</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <!-- heading tags -->
+        <h1>Heading Tag 1</h1>
+        <h2>Heading Tag 2</h2>
+        <h3>Heading Tag 3</h3>
+        <h4>Heading Tag 4</h4>
+        <h5>Heading Tag 5</h5>
+        <h6>Heading Tag 6</h6>
+
+        <!-- form tags -->
+        <form method="post" action="backend.php">
+            <label>Enter Username:</label>
+            <input type="text" name="uname" />
+            <label>Enter Password:</label>
+            <input type="password" name="pwd" />
+            <button type="submit">Submit</button>
+        </form>
+
+        <form>
+            <fieldset>
+                <legend>Sample form:</legend>
+                <formgroup>
+                    <label for="uname">Username:</label>
+                    <input type="text" id="uname" name="uname" />
+                </formgroup>
+                <label>Enter Password:</label>
+                <input type="password" name="pwd" />
+                <textarea></textarea>
+                <button type="submit">Submit</button>
+            </fieldset>
+        </form>
+
+        <form>
+            <fieldset>
+                <legend>HTML Input Tags:</legend>
+                
+                <!--text fields-->
+                <input class="textbox" type="text" name="name_inp" id="name_txt" class="textbox" value="Hello" required/>
+                <input class="textbox" type="url" placeholder="Enter a URL"/>
+                <input class="textbox" type="search" />
+                <input class="textbox" type="password" />
+                <input class="textbox" id="number-input" type="number" />
+                <input class="textbox" id="email-input" type="email" />
+                <input class="textbox" type="tel" id="telephone" />
+                <textarea class="textbox" rows="10" cols="50"></textarea><br><br>
+    
+                <!-- date/time -->
+                <input id="date-picker" type="date" name="date">
+                <input type="datetime-local">
+                <input type="datetime" >
+                <input type="month">
+                <input type="week">
+                <input type="time">
+                <br><br>
+    
+                <!--check box-->
+                <input name="chk1" type="checkbox"><label>Option 1</label>
+                <input name="chk2" type="checkbox"><label>Option 2</label>
+    
+                <!-- radiobtn -->
+                <input name="gender" type="radio" value="male"><label>Male</label>
+                <input name="gender" type="radio" value="female"><label>Female</label>
+                <input name="gender" type="radio" value="others"><label>Others</label>
+    
+                <!-- selectors -->
+                <input type="color" name="color">
+                <input type="file">
+                <input type="range" name="range" min="0" max="10">
+    
+                <!-- buttons -->
+                <input type="image" src="./user-avatar.png" alt="Submit" width="48" height="48">
+                <input type="button" value="CLICK" />
+                <input type="submit" value="SUBMIT"/>
+                <input type="reset" />
+    
+                <button type="submit">Submit LOGIN</button>
+                <button type="menu">MENU BUTTON</button>
+                <button type="button">Button</button>
+                <button type="reset">Reset</button>
+            </fieldset>
+        </form>
+
+
+    </body>
+</html>
