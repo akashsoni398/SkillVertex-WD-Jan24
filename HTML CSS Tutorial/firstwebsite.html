@@ -3,13 +3,161 @@
     <head>
         <title>First Website</title>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Akash Soni" />
         <meta name="description" content="rfsdfdsfsd" />
         <link href="./external.css" rel="stylesheet" />
-        <style></style>
+        <style>
+             /*
+                selector {
+                    property: value;
+                }
+             */
+
+            /* css selectors */
+                /* id selector (#) */
+                    #para1 {
+                            font-style: italic;
+                    }
+                    #para2 {
+                        font-weight: bold;
+                    }
+
+                /* class selector (.) */
+                    .textbox {
+                        border: 2px solid rgb(10, 255, 10);
+                    }
+
+                /* tag selector */
+                    input {
+                        background-color: rgb(255, 255, 0);
+                    }
+
+                /* grouping of selectors (,) */
+                    table,th,td {
+                        border: 1px dashed red;
+                        border-style: ridge;
+                    }
+
+                /* universal selector */
+                    table * {
+                        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                        font-weight: normal;
+                    }
+
+                /* attribute selector */
+                    img[src="./assets/image.jpeg"] {
+                        height: 100px;
+                    }
+
+                /* relational selector */
+                #john, #john div {
+                    background-color: white;
+                    margin: 20px;
+                    padding: 15px;
+                    border: 2px solid red;
+                }
+
+                    /* descendent selector ( ) */
+                        #rohan div {
+                            background-color: aqua;
+                        }
+
+                    /* child selector (>) */
+                        #rohan>div {
+                            background-color: blue;
+                        }
+
+                    /* adjacent selector (+) */
+                        #bob+div {
+                            background-color: chartreuse;
+                        }
+                         
+                    /* sibling selector (~) */
+                        #bob~div {
+                            background-color: darkgreen;
+                        }
+                
+                /* media queries */
+                    @media screen and (max-width: 990px) {
+                        body {
+                            background-color: crimson;
+                        }
+                    }
+                    @media screen and (min-width: 990px) {
+                        body {
+                            background-color:blueviolet;
+                        }
+                    }
+                
+                /* css animation */
+                    #box {
+                        height:200px;
+                        width: 200px;
+                        background-color: brown;
+                        animation-name: sample-animate2;
+                        animation-duration: 4s;
+                        animation-delay: 2s;
+                        animation-iteration-count: infinite;
+                        animation-direction: alternate ;
+                        animation-timing-function:cubic-bezier(0.075, 0.820, 0.165, 1);
+                    }
+
+                    @keyframes sample-animate {
+                        from {
+                            background-color: aqua;
+                        }
+                        to {
+                            background-color: brown;
+                        }
+                    }
+
+                    @keyframes sample-animate2 {
+                        0% {height: 100px; width: 100px;}
+                        25% {height: 200px; width: 200px;}
+                        50% {height: 300px; width: 300px;}
+                        75% {height: 200px; width: 200px;}
+                        100% {height: 100px; width: 100px;}
+                    }
+
+                    #box2 {
+                        width: 100px;
+                        height: 200px;
+                        background-color: red;
+                        transition: width 2s, height 4s;
+                        
+                    }
+                    #box2:hover {
+                        width: 400px;
+                        height: 400px;
+                    }
+
+                /* css subclasses */
+                    div:hover {
+                        border: 2px solid white;
+                    }
+                    
+                        
+        </style>
         <script></script>
     </head>
     <body>
+        <div id="box2"></div>
+        <div id="box"></div>
+        <div id="john"> 
+            <div id="steve">
+                <div id="lee"></div>
+                <div id="bob"></div>
+                <div id="ella"></div>
+                <div id="emma"></div>
+            </div>
+            <div id="rohan">
+                <div id="sal">
+                    <div id="sam"></div>
+                </div>
+                <div id="tom"></div>
+            </div>
+        </div>
         <!-- basic tags -->
         <p lang="" dir="ltr" id="para" class="subtitle" style="color: red;" title="This is a paragraph">Hello World</p>
         <div>This is a        div      tag</div>
