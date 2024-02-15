@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Tutorial</title>
+</head>
+<body>
+    <p id="para">This is a paragraph</p>
+    <input type="text" id="input" placeholder="Enter input" />
+    <button id="btn" type="button" onclick="window.print();">Click</button>
+    <input type="number" id="age-input" value="24" />
+    <input type="text" id="ll-input" value="true" />
+    <input type="text" id="grade-input" value="g-" />
+    <script>
+        // single line comments
+
+        /* multiple 
+           line
+           comment
+        */
+
+        // data storage / variables
+            var varname;           // variable declaration
+            varname = "random";    // variable initialization
+            var varname = "random";
+
+            let letvarname;
+            const constvarname=4234;
+
+
+            let str = "string";
+            let num = 43242343;
+            let numasstr = "34324";
+            let float = 4234.34;
+            let bool = true;
+
+            let array2 = ["wefwef",2423423,true];
+            let array3 = ["wefwef",2423423,true,[3232,343,3434]];
+
+            let object = {
+                studname: {
+                    firstname:"Akash",
+                    middlename: null,
+                    lastname: "Soni"
+                },
+                usn_no: 255435,
+                address: {
+                    state: "Karnataka",
+                    city: "BAngalore",
+                    pincode: 560076,
+                    landmark:"",
+                    address:""
+                }
+            }
+
+            let funcname = () => {
+                return 1;
+            }
+
+
+        // input / output
+            document.getElementById("para").innerText;
+            document.getElementById("para").innerHTML;
+            let x = document.getElementById("input").value;
+
+
+
+            document.getElementById("para").innerText = "This is edited in JS";
+            document.getElementById("para").innerHTML += "<span>This is appended in JS</span>";
+            
+            document.write("<span>This is appended in JS</span>");
+
+            console.log("This is message");
+            console.error("This is an error");
+
+            window.alert("This is an alert message"); 
+            let prompt = window.prompt("Are you sure? Enter 'yes' to confirm.")??"No";
+            if(prompt.toUpperCase()=='YES') { console.log("Document deleted"); }
+            let confirm = window.confirm("Are you sure?");
+            if(confirm==true) { console.log("Document deleted"); }
+
+            window.print();
+
+        // operators
+            // arithmetic operators (+ - * / % ++ --)
+                if(num%2==0) {}
+
+                let a=10;
+                let b = a++;
+                let c = ++a;
+                console.log(b,c);
+
+            // comparison operators (> < >= <= == === !=)
+                a=10; b='10';
+                if(a==b) {
+                    console.log("true");
+                }
+                if(a===b) {
+                    console.log("true");
+                }
+                if(a!=b) {
+                    console.log("true");
+                }
+
+            // logical operators (&& || !)
+                if(a==b && b==c) {
+                    console.log("a==c")
+                }
+                let age3=""; let lll="";let dll="";
+                if(age3>18 && dl==true) {
+                    console.log("eligible to drive");
+                }
+                if(dll==true || lll==true) {
+                    console.log("eligible to drive");
+                }
+
+                if(!age3) {
+                    console.log("Age does not exist");
+                }
+                
+            // assignment operators (= += -= *= /= %=)
+                let z=10;
+                z+=10;
+                z-=10;
+                z*=10;
+                z%=10;
+                a = 10; b=30;
+                c=a+b;
+                a+=b;
+
+            // conditional operator
+            let condition;
+                (condition) ? "statement_1" : "statement_2" ;
+
+                let age2 = 16;
+                let message = (age2>=18) ? "you're an adult" : "you're a minor";
+
+            // nullish coalescing operator
+                let message2 = funcname() ?? "default";
+
+        // branching (if statement, if...else statement, if...elseif...else statement)
+            let age = document.getElementById("age-input").value;
+            let ll = document.getElementById("ll-input").value;
+            ll = !!ll;
+            
+            // if statement
+                if(age >= 18) {
+                    console.log("Eligible to drive");
+                }
+
+            // if...else statement
+                if(age>=18) {
+                    console.log("Eligible to drive");
+                } 
+                else {
+                    console.log("Not eligible to drive");
+                }
+            
+            // if...else if...else statement
+                if(age<=16) {
+                    console.log("Not eligible to drive");
+                }
+                if(age<18 && ll==false) {
+                    console.log("Not eligible to drive");
+                }
+                if(age<18 && ll==true) {
+                    console.log("Eligible to drive under supervision");
+                }
+                if(age>=18 && ll==false) {
+                    console.log("Not eligible to drive")
+                }
+                if(age>=18 && ll==true) {
+                    console.log("Eligible for drivers' license");
+                }
+                else {
+                    comsole.error("unidentified error occured");
+                }
+            
+            // switch...case
+                let grade = document.getElementById("grade-input").value;
+                grade = grade.toUpperCase();
+
+                switch(grade) {
+                    case 'A+':
+                        console.log("Marks in the range of 95 to 100");
+                        break;
+                    case 'A':
+                        console.log("Marks in the range of 85 to 95");
+                        break;
+                    case 'B+':
+                        console.log("Marks in the range of 75 to 85");
+                        break;
+                    case 'B':
+                        console.log("Marks in the range of 65 to 75");
+                        break;
+                    case 'C':
+                        console.log("Marks in the range of 55 to 65");
+                        break;
+                    case 'D':
+                        console.log("Marks in the range of 40 to 55");
+                        break;
+                    case 'F':
+                        console.log("Marks below 40");
+                        break;
+                    default:
+                        console.error("Incorrect grade provided");
+                }
+
+        // looping 
+            // while loop
+                let i = 0;
+                while(i<=100) {
+                    (i%2==0) ? console.log(i) : false ;
+                    i++;
+                }
+
+            // for loop
+                for(let j = 100;j>=0;j--) {
+                    (j%2!=0) ? console.log(j) : false ;
+                }
+
+            // do...while loop
+                i = 1000;
+                do {
+                    (i%2==0) ? console.log(i) : false ;
+                    i++;
+                }
+                while(i<=100);
+
+            // for...of loop
+                array2 = ["wefwef",2423423,true];
+                for(let value of array2) {
+                    console.log(value);
+                }
+
+            // for...in loop
+                let student_details = {
+                    student1: {
+
+                    },
+                    student2: {
+                        name: {
+                            fname:"Akash",
+                            mname:"",
+                            lname:"Soni"
+                        },
+                        contact: {
+                            email:"akash@gmail.com",
+                            phno: "+91 323544321",
+                        }
+                    }
+                }
+                for(let value in student_details.student2) {
+                    console.log(student_details.student2[value]);
+                }
+
+        // Functions / functional programming
+            function funcn(a,b) {
+                return a*b;
+            }
+
+            let funcn = (a,b) => {
+                return a*b;
+            }
+
+    </script>
+</body>
+</html>
