@@ -44,11 +44,55 @@
     </div>
 
     <!-- note cards -->
-    <div class="container-md text-center" id="notes-container">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 text-center" id="notes">
+    <div class="container-fluid text-center" id="notes-container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5 text-center" id="notes">
             <h1></h1>
             <h1>No notes available to show at the moment.</h1>
             <h1></h1>
+        </div>
+    </div>
+
+    <!-- edit note modal -->
+    <div class="modal" id="editNoteModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Note</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button> 
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <input type="text" id="edit-note-modal-title" class="form-control" placeholder="Note Title" required />
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text">0/250<br>charecters</span>
+                        <textarea class="form-control" rows="5" id="edit-note-modal-content" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="edit-note-modal-close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="edit-note-submit-btn">Update Note</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- delete note modal -->
+    <div class="modal" id="deleteNoteModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Note</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button> 
+                </div>
+                <div class="modal-body">
+                    <p id="delete-note-modal-content"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="delete-note-modal-close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="delete-note-submit-btn">Update Note</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -64,6 +108,7 @@
             }
 
             idb.onsuccess = () => {
+                
                 let res = idb.result;
                 let tx = res.transaction('notes','readonly');
                 let store = tx.objectStore('notes');
@@ -72,10 +117,9 @@
                 cursor.onsuccess = () => {
                     let note = cursor.result;
                     if(note) {
-                        console.log("note is true");
                         document.getElementById("notes-container").innerHTML =`<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 text-center" id="notes"></div>`;
                         noteCard += `
-                        <div class="col">
+                        <div class="col mb-3">
                             <div class="card text-center" data-bs-toggle="modal" data-bs-target="#viewNoteModal">
                                 <div onclick="viewNote(${note.key})" class="card-body">
                                     <h5 class="card-title">${note.value.noteTitle}</h5>
@@ -89,10 +133,10 @@
                                     </div>
                                     <div class="row align-items-center">
                                         <div class="col align-self-center p-0">
-                                            <button type="button" onclick="editNote(${note.key})" class="btn btn-success container-fluid rounded-start-3 rounded-end-0">Edit</button>
+                                            <button type="button" onclick="editNote(${note.key})" class="btn btn-success container-fluid rounded-start-3 rounded-end-0" data-bs-toggle="modal" data-bs-target="#editNoteModal">Edit</button>
                                         </div>
                                         <div class="col align-self-center p-0">
-                                            <button type="button" onclick="deleteNote(${note.key})" class="btn btn-danger container-fluid  rounded-start-0 rounded-end-3">Delete</button>
+                                            <button type="button" onclick="deleteNote(${note.key})" class="btn btn-danger container-fluid  rounded-start-0 rounded-end-3" data-bs-toggle="modal" data-bs-target="#deleteNoteModal">Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -129,6 +173,78 @@
             document.getElementById("add-note-modal-close").click();
             refreshNotes();
         }
+
+        let editNote = (key) => {
+            let idb = indexedDB.open("notes-editor",1);
+
+            idb.onsuccess = () => {
+                let res = idb.result;
+                let tx = res.transaction('notes','readonly');
+                let store = tx.objectStore('notes');
+                let selectedNote = store.get(key);
+                
+                selectedNote.onsuccess = () => {
+                    console.log(selectedNote.result);
+                    document.getElementById("edit-note-modal-title").value = selectedNote.result.noteTitle;
+                    document.getElementById("edit-note-modal-content").value = selectedNote.result.noteContent;
+                }
+            }
+
+            document.getElementById("edit-note-submit-btn").onclick = () => {
+                let newNoteTitle = document.getElementById("edit-note-modal-title").value;
+                let newNoteContent = document.getElementById("edit-note-modal-content").value;
+                let date = new Date();
+                let newNoteDateTime = date.toLocaleString();
+
+                let idb = indexedDB.open("notes-editor",1);
+
+                idb.onsuccess = () => {
+                    let res = idb.result;
+                    let tx = res.transaction('notes','readwrite');
+                    let store = tx.objectStore('notes');
+                    store.put({
+                        noteTitle: newNoteTitle,
+                        noteContent: newNoteContent,
+                        noteDateTime: newNoteDateTime
+                    }, key);
+                }
+                document.getElementById("edit-note-modal-title").value = "";
+                document.getElementById("edit-note-modal-content").value = "";
+                document.getElementById("edit-note-modal-close").click();
+                refreshNotes();
+            }
+        }
+
+        let deleteNote = (key) => {
+            let idb = indexedDB.open("notes-editor",1);
+
+            idb.onsuccess = () => {
+                let res = idb.result;
+                let tx = res.transaction('notes','readonly');
+                let store = tx.objectStore('notes');
+                let selectedNote = store.get(key);
+                
+                selectedNote.onsuccess = () => {
+                    console.log(selectedNote.result);
+                    document.getElementById("delete-note-modal-content").innerHTML = "Are you sure on deleting the note titled "+selectedNote.result.noteTitle;
+                }
+            }
+
+            document.getElementById("delete-note-submit-btn").onclick = () => {
+                let idb = indexedDB.open("notes-editor",1);
+
+                idb.onsuccess = () => {
+                    let res = idb.result;
+                    let tx = res.transaction('notes','readwrite');
+                    let store = tx.objectStore('notes');
+                    store.delete(key);
+                }
+                document.getElementById("delete-note-modal-close").click();
+                location.reload();
+            }
+            
+        }
+
         refreshNotes();
     </script>
 </body>
