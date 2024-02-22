@@ -12,7 +12,7 @@
 <body>
     <!-- add note button -->
     <div class="my-5 container-fluid text-center">
-        <button class="btn btn-outline-warning px-4 py-3" id="add-note-btn" data-bs-toggle="modal" data-bs-target="#addNoteModal">
+        <button class="btn btn-outline-success px-4 py-3" id="add-note-btn" data-bs-toggle="modal" data-bs-target="#addNoteModal">
             <i class="bi bi-file-earmark-plus-fill"></i>
             <span>Add Note</span>
         </button>
@@ -31,13 +31,13 @@
                         <input type="text" id="add-note-modal-title" class="form-control" placeholder="Note Title" required />
                     </div>
                     <div class="input-group">
-                        <span class="input-group-text">0/250<br>charecters</span>
-                        <textarea class="form-control" rows="5" id="add-note-modal-content" required></textarea>
+                        <span class="input-group-text" id="add-note-modal-content-label">0/250<br>charecters</span>
+                        <textarea class="form-control" rows="5" id="add-note-modal-content" onkeyup="contentOnAddText()" required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="add-note-modal-close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="addNoteSubmit()">Add note</button>
+                    <button type="submit" class="btn btn-success" id="add-note-modal-submit-btn" onclick="addNoteSubmit()">Add note</button>
                 </div>
             </div>
         </div>
@@ -65,13 +65,13 @@
                         <input type="text" id="edit-note-modal-title" class="form-control" placeholder="Note Title" required />
                     </div>
                     <div class="input-group">
-                        <span class="input-group-text">0/250<br>charecters</span>
+                        <span class="input-group-text" id="">0/250<br>charecters</span>
                         <textarea class="form-control" rows="5" id="edit-note-modal-content" required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="edit-note-modal-close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="edit-note-submit-btn">Update Note</button>
+                    <button type="button" class="btn btn-success" id="edit-note-submit-btn">Update Note</button>
                 </div>
             </div>
         </div>
@@ -89,12 +89,50 @@
                     <p id="delete-note-modal-content"></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="delete-note-modal-close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="delete-note-submit-btn">Update Note</button>
+                    <button type="button" class="btn btn-danger" id="delete-note-submit-btn">Yes</button>
+                    <button type="button" id="delete-note-modal-close" class="btn btn-success" data-bs-dismiss="modal">No</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- view note modal -->
+    <div class="modal" id="viewNoteModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Viewing Note</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button> 
+                </div>
+                <div class="modal-body text-wrap">
+                    <h2 class="fs-5" id="view-note-modal-title"></h2>
+                    <hr>
+                    <p id="view-note-modal-content"></p>
+                  </div>
+                <div class="modal-footer">
+                    <button type="button" id="view-note-modal-close" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <script>
         
@@ -128,12 +166,12 @@
                                 <div class="card-footer text-muted container-fluid px-3 pb-1 pt-0">
                                     <div class="row align-items-center">
                                         <div class="col align-items-center py-2">
-                                            <span>Card ${note.value.noteDateTime}</span>
+                                            <span>${note.value.noteDateTime}</span>
                                         </div>
                                     </div>
                                     <div class="row align-items-center">
                                         <div class="col align-self-center p-0">
-                                            <button type="button" onclick="editNote(${note.key})" class="btn btn-success container-fluid rounded-start-3 rounded-end-0" data-bs-toggle="modal" data-bs-target="#editNoteModal">Edit</button>
+                                            <button type="button" onclick="editNote(${note.key})" class="btn btn-warning container-fluid rounded-start-3 rounded-end-0" data-bs-toggle="modal" data-bs-target="#editNoteModal">Edit</button>
                                         </div>
                                         <div class="col align-self-center p-0">
                                             <button type="button" onclick="deleteNote(${note.key})" class="btn btn-danger container-fluid  rounded-start-0 rounded-end-3" data-bs-toggle="modal" data-bs-target="#deleteNoteModal">Delete</button>
@@ -171,6 +209,7 @@
             document.getElementById("add-note-modal-title").value = "";
             document.getElementById("add-note-modal-content").value = "";
             document.getElementById("add-note-modal-close").click();
+            document.getElementById("add-note-modal-content-label").innerHTML = "0/250<br>charecters";
             refreshNotes();
         }
 
@@ -225,7 +264,6 @@
                 let selectedNote = store.get(key);
                 
                 selectedNote.onsuccess = () => {
-                    console.log(selectedNote.result);
                     document.getElementById("delete-note-modal-content").innerHTML = "Are you sure on deleting the note titled "+selectedNote.result.noteTitle;
                 }
             }
@@ -242,7 +280,40 @@
                 document.getElementById("delete-note-modal-close").click();
                 location.reload();
             }
-            
+        }
+
+        let viewNote = (key) => {
+            let idb = indexedDB.open("notes-editor",1);
+
+            idb.onsuccess = () => {
+                let res = idb.result;
+                let tx = res.transaction('notes','readonly');
+                let store = tx.objectStore('notes');
+                let selectedNote = store.get(key);
+                
+                selectedNote.onsuccess = () => {
+                    document.getElementById("view-note-modal-title").innerText = "Note Title: "+selectedNote.result.noteTitle;
+                    document.getElementById("view-note-modal-content").innerHTML = "<b>Note Content: </b><br>"+selectedNote.result.noteContent;
+                }
+            }
+        }
+
+        let contentOnAddText = () => {
+            let text = document.getElementById("add-note-modal-content").value;
+            document.getElementById("add-note-modal-content-label").innerHTML = text.length+"/250<br>charecters";
+            let TA = document.getElementById('add-note-modal-content');
+            if(text.length>250) {
+                TA.classList.add("border");
+                TA.classList.add("border-3");
+                TA.classList.add("border-danger");
+                document.getElementById('add-note-modal-submit-btn').classList.add("disabled");
+            }
+            else {
+                TA.classList.remove("border");
+                TA.classList.remove("border-3");
+                TA.classList.remove("border-danger");
+                document.getElementById('add-note-modal-submit-btn').classList.remove("disabled");
+            }
         }
 
         refreshNotes();
